@@ -1,0 +1,39 @@
+local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
+
+local PetewareToolbox = Library:NewWindow("Dev Toolbox | Peteware")
+
+local Guides = PetewareToolbox:NewSection("Guides")
+
+Guides:CreateButton("Semantic Versioning", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/poupeue/VersioningForBeginners/refs/heads/main/guide.lua",true))()
+end)
+
+local Tools = PetewareToolbox:NewSection("Toolbox")
+
+Tools:CreateButton("Infinite Yield", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+end)
+
+Tools:CreateButton("Remote Spy", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua"))()
+end)
+
+Tools:CreateButton("Dex Explorer", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+end)
+
+Tools:CreateButton("Hydroxide", function()
+local owner = "Upbolt"
+local branch = "revision"
+
+local function webImport(file)
+    return loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/%s/Hydroxide/%s/%s.lua"):format(owner, branch, file)), file .. '.lua')()
+end
+
+webImport("init")
+webImport("ui/main")
+end)
+
+Tools:CreateButton("Adv AC Scanner", function()
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Advanced-Game-Anti-Cheat-Scanner-33244",true))()
+end)

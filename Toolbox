@@ -87,15 +87,35 @@ local function serverHop()
 end
 
 local function Debuggetgenv()
+    print([[ [Toolbox]: getgenv() contents:
+    
+---------------------------------------------------------------------------------------------------------------------------
+        
+        ]])
     for name, value in pairs(getgenv()) do
-    print(name, value)
+    print(" →", name, "=", value)
 end
+    print([[ 
+        
+---------------------------------------------------------------------------------------------------------------------------
+        
+        ]])
 end
 
 local function Debug_G()
+    print([[ [Toolbox]: _G contents:
+    
+---------------------------------------------------------------------------------------------------------------------------
+        
+        ]])
     for name, value in pairs(_G) do
-    print(name, value)
+    print(" →", name, "=", value)
 end
+    print([[ 
+        
+---------------------------------------------------------------------------------------------------------------------------
+
+        ]])
 end
 
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
@@ -141,10 +161,13 @@ end)
 local Tools = PetewareToolbox:NewSection("Debugging")
 
 Tools:CreateButton("Print Global Variables V1", function()
-Debuggetgenv()
-end)
-Tools:CreateButton("Print Global Variables V2", function()
+    StarterGui:SetCore("DevConsoleVisible", true)
 Debug_G()
+end)
+
+Tools:CreateButton("Print Global Variables V2", function()
+    StarterGui:SetCore("DevConsoleVisible", true)
+Debuggetgenv()
 end)
 
 local Other = PetewareToolbox:NewSection("Other")

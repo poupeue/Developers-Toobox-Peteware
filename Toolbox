@@ -13,6 +13,18 @@
 
 --Discord server: https://discord.gg/zNFdGtvdgR
 
+local function Debuggetgenv()
+    for name, value in pairs(getgenv()) do
+    print(name, value)
+end
+end
+
+local function Debug_G()
+    for name, value in pairs(_G) do
+    print(name, value)
+end
+end
+
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 
 local PetewareToolbox = Library:NewWindow("Dev Toolbox | Peteware")
@@ -51,4 +63,13 @@ end)
 
 Tools:CreateButton("Adv AC Scanner", function()
 loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Advanced-Game-Anti-Cheat-Scanner-33244",true))()
+end)
+
+local Tools = PetewareToolbox:NewSection("Debugging")
+
+Tools:CreateButton("Print Global Variables (_G)", function()
+Debuggetgenv()
+end)
+Tools:CreateButton("Print Global Variables (getgenv())", function()
+Debug_G()
 end)

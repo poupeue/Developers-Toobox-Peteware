@@ -67,9 +67,9 @@ end)
 
 local Tools = PetewareToolbox:NewSection("Debugging")
 
-Tools:CreateButton("Print Global Variables (_G)", function()
+Tools:CreateButton("Print Global Variables V1", function()
 Debuggetgenv()
 end)
-Tools:CreateButton("Print Global Variables (getgenv())", function()
+Tools:CreateButton("Print Global Variables V2", function()
 Debug_G()
 end)

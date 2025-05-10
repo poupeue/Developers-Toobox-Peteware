@@ -1,6 +1,6 @@
 # Peteware Dev Toolbox
 
-Welcome to the **Peteware Dev Toolbox**, a collection of useful tools and guides for Roblox developers. This toolbox includes various scripts that can be quickly loaded into your game to enhance your development experience.
+Welcome to the **Peteware Dev Toolbox**, a useful hacking utility that inclues tools and guides for Roblox developers. This toolbox includes various scripts that can be quickly loaded into your game to enhance your development experience.
 
 ## Features
 

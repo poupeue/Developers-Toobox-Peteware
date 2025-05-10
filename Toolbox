@@ -13,6 +13,79 @@
 
 --Discord server: https://discord.gg/zNFdGtvdgR
 
+local StarterGui = game:GetService("StarterGui")
+httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
+queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+
+local TeleportCheck = false
+
+_G.KeepOnTeleport = true -- set to false if you dont want execution on server hop / rejoin
+
+if _G.KeepOnTeleport then
+
+        game.Players.LocalPlayer.OnTeleport:Connect(function(State)
+            if not TeleportCheck and queueteleport then
+                TeleportCheck = true
+                queueteleport([[
+                repeat wait() until game:IsLoaded()
+                task.wait(1)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/poupeue/Developers-Toobox-Peteware/refs/heads/main/Toolbox", true))()
+]])
+            end
+        end)
+end
+    
+local function rejoinServer()
+    StarterGui:SetCore("SendNotification", {
+        Title = "Rejoining...",
+        Text = "Attempting to Rejoin Server",
+        Icon = "rbxassetid://108052242103510",
+        Duration = 3.5,
+    })
+task.wait(1)
+    game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, game.jobId)
+end
+
+local function serverHop()
+    StarterGui:SetCore("SendNotification", {
+                Title = "Server Hop",
+                Text = "Couldnt find a available server",
+                Icon = "rbxassetid://108052242103510",
+                Duration = 3.5,
+                })
+    if httprequest then
+        local servers = {}
+        local req = httprequest({Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", game.placeId)})
+        local body = HttpService:JSONDecode(req.Body)
+
+        if body and body.data then
+            for i, v in next, body.data do
+                if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= game.jobId then
+                    table.insert(servers, 1, v.id)
+                end
+            end
+        end
+
+        if #servers > 0 then
+            game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, servers[math.random(1, #servers)], Player)
+        else
+            return StarterGui:SetCore("SendNotification", {
+                Title = "Server Hop",
+                Text = "Server Hop Failed. Couldnt find a available server",
+                Icon = "rbxassetid://108052242103510",
+                Duration = 3.5,
+            })
+        end
+    else
+       StarterGui:SetCore("SendNotification", {
+                Title = "Incompatible Exploit",
+                Text = "Your exploit does not support this function (missing request)",
+                Icon = "rbxassetid://108052242103510",
+                Duration = 3.5,
+            })
+    end
+end
+
 local function Debuggetgenv()
     for name, value in pairs(getgenv()) do
     print(name, value)
@@ -72,4 +145,14 @@ Debuggetgenv()
 end)
 Tools:CreateButton("Print Global Variables V2", function()
 Debug_G()
+end)
+
+local Other = PetewareToolbox:NewSection("Other")
+
+Other:CreateButton("Rejoin", function()
+    rejoinServer()
+end)
+
+Other:CreateButton("Server Hop", function()
+    rejoinServer()
 end)
